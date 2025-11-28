@@ -1,2 +1,0 @@
-# CSE341-FINAL
-CSE341-FINAL project
