@@ -1,0 +1,199 @@
+[{
+  "_id": {
+    "$oid": "692363ff79b3c3b2d5cfffae"
+  },
+  "email": "marie.kouassi@email.com",
+  "password": "$2a$10$kA3iqRtwd0Dr/T1trAorqe6NOpnv8drG7G8XW6rPzW.WD/rrPeFh6",
+  "name": "Marie Kouassi",
+  "phone": "+2250709876543",
+  "userType": "customer",
+  "location": {
+    "city": "Abidjan",
+    "district": "Plateau",
+    "coordinates": {
+      "latitude": 5.3207,
+      "longitude": -4.0148
+    }
+  },
+  "isVerified": false,
+  "createdAt": {
+    "$date": "2025-11-23T19:43:59.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692363ff79b3c3b2d5cfffaf"
+  },
+  "email": "david.koffi@email.com",
+  "password": "$2a$10$fTC8GgeQDQG5WYNmakTB4OlaXJPL8nr/CUqZlBFGdUwFI6qJFQcNO",
+  "name": "David Koffi",
+  "phone": "+2250705555555",
+  "userType": "customer",
+  "location": {
+    "city": "Abidjan",
+    "district": "Marcory",
+    "coordinates": {
+      "latitude": 5.2919,
+      "longitude": -3.9956
+    }
+  },
+  "isVerified": false,
+  "createdAt": {
+    "$date": "2025-11-23T19:43:59.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6923640079b3c3b2d5cfffb1"
+  },
+  "email": "konan.plumber@services.ci",
+  "password": "$2a$10$Z8QX78/narUfhEGHEVd9AePRZLbsIeSM46YuHqzewxm8MUhVOnlX.",
+  "name": "Konan Baptiste",
+  "phone": "+2250707777777",
+  "userType": "provider",
+  "location": {
+    "city": "Abidjan",
+    "district": "Cocody",
+    "coordinates": {
+      "latitude": 5.3599,
+      "longitude": -4.0083
+    }
+  },
+  "isVerified": true,
+  "createdAt": {
+    "$date": "2025-11-23T19:44:00.119Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6923640079b3c3b2d5cfffb2"
+  },
+  "email": "amina.electric@services.ci",
+  "password": "$2a$10$/ZSKzvwUJIhiM4p2S3cMquF2taUWX7.zfDyl0Cm1y3OHpZNOdBz7O",
+  "name": "Amina Traoré",
+  "phone": "+2250708888888",
+  "userType": "provider",
+  "location": {
+    "city": "Abidjan",
+    "district": "Plateau",
+    "coordinates": {
+      "latitude": 5.3207,
+      "longitude": -4.0148
+    }
+  },
+  "isVerified": true,
+  "createdAt": {
+    "$date": "2025-11-23T19:44:00.120Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6923640079b3c3b2d5cfffb3"
+  },
+  "email": "yao.cleaner@services.ci",
+  "password": "$2a$10$tEvpBLb1mE1HXxllJEFZLuBzhoBQSNJUyvgxgBu.wkpw4Zc5Aq/SK",
+  "name": "Yao Michel",
+  "phone": "+2250709999999",
+  "userType": "provider",
+  "location": {
+    "city": "Abidjan",
+    "district": "Yopougon",
+    "coordinates": {
+      "latitude": 5.3364,
+      "longitude": -4.089
+    }
+  },
+  "isVerified": true,
+  "createdAt": {
+    "$date": "2025-11-23T19:44:00.120Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6923640079b3c3b2d5cfffb4"
+  },
+  "email": "sandra.tutor@services.ci",
+  "password": "$2a$10$p4Bo1HtpSkPCXC80gsq/y..fBsqaAriFz4V1RlchCdeUkArXk2rl2",
+  "name": "Sandra Bamba",
+  "phone": "+2250701111111",
+  "userType": "provider",
+  "location": {
+    "city": "Abidjan",
+    "district": "Cocody",
+    "coordinates": {
+      "latitude": 5.3599,
+      "longitude": -4.0083
+    }
+  },
+  "isVerified": true,
+  "createdAt": {
+    "$date": "2025-11-23T19:44:00.120Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6923640079b3c3b2d5cfffb5"
+  },
+  "email": "eric.techrepair@services.ci",
+  "password": "$2a$10$3zMHkKA9uaoBaNJ/8R8WH.gncHa1X2e33xxW0zk/UHIU.PwXECXP2",
+  "name": "Eric Mensah",
+  "phone": "+2250702222222",
+  "userType": "provider",
+  "location": {
+    "city": "Abidjan",
+    "district": "Marcory",
+    "coordinates": {
+      "latitude": 5.2919,
+      "longitude": -3.9956
+    }
+  },
+  "isVerified": true,
+  "createdAt": {
+    "$date": "2025-11-23T19:44:00.121Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69236763465f9a3a90e08402"
+  },
+  "email": "rellinxe@gmail.com",
+  "password": "$2a$10$Fx8FYNq1oJ/Qpdhrwu8TOuZ39YzaAlncJ9e3UZquRe6imdemUOdom",
+  "name": "Rellinxe Boni",
+  "phone": "0546568022",
+  "userType": "customer",
+  "location": {
+    "city": "Lagunes",
+    "district": "Abidjan"
+  },
+  "isVerified": false,
+  "createdAt": {
+    "$date": "2025-11-23T19:58:27.541Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6923777ff0b7234780da672b"
+  },
+  "email": "fyoni@gmail.com",
+  "password": "$2a$10$qMtTXjBtTMfz1vhHrugFe.ZaX7qI6QajVFFFict9pbMzBGtuEtz/C",
+  "name": "fyoni provider",
+  "phone": "+225 67 76 51 07",
+  "userType": "provider",
+  "location": {
+    "city": "Abidjan",
+    "district": "cocody"
+  },
+  "isVerified": false,
+  "createdAt": {
+    "$date": "2025-11-23T21:07:11.347Z"
+  },
+  "__v": 0
+}]
