@@ -44,4 +44,3 @@ passport.deserializeUser(async (id, done) => {
 });
 
 module.exports = passport;
-//note to self: set up google log in Oauth
