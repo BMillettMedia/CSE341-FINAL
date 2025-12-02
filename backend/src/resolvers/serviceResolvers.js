@@ -1,11 +1,12 @@
-import { Service } from '../models/Service';
-import { User } from '../models/User';
-import { GraphQLError } from 'graphql';
+// backend/src/resolvers/serviceResolvers.js
+const { Service } = require('../models/Service');
+const { User } = require('../models/User');
+const { GraphQLError } = require('graphql');
 
-export const serviceResolvers = {
+const serviceResolvers = {
   Query: {
-    services: async (_: any, { location, category }: any) => {
-      const filter: any = {};
+    services: async (_, { location, category }) => {
+      const filter = {};
       
       if (location) {
         filter['location.city'] = { $regex: location, $options: 'i' };
@@ -29,7 +30,7 @@ export const serviceResolvers = {
       }));
     },
 
-    service: async (_: any, { id }: any) => {
+    service: async (_, { id }) => {
       const service = await Service.findById(id);
       
       if (!service) {
@@ -50,7 +51,7 @@ export const serviceResolvers = {
       };
     },
 
-    provider: async (_: any, { id }: any) => {
+    provider: async (_, { id }) => {
       const user = await User.findById(id);
       
       if (!user || user.userType !== 'provider') {
@@ -74,7 +75,7 @@ export const serviceResolvers = {
   },
 
   Mutation: {
-    createService: async (_: any, { input }: any, context: any) => {
+    createService: async (_, { input }, context) => {
       if (!context.user) {
         throw new GraphQLError('Not authenticated', {
           extensions: { code: 'UNAUTHENTICATED' }
@@ -108,7 +109,7 @@ export const serviceResolvers = {
       };
     },
 
-    updateService: async (_: any, { id, input }: any, context: any) => {
+    updateService: async (_, { id, input }, context) => {
       if (!context.user) {
         throw new GraphQLError('Not authenticated', {
           extensions: { code: 'UNAUTHENTICATED' }
@@ -136,18 +137,18 @@ export const serviceResolvers = {
       );
 
       return {
-        serviceId: updatedService!._id.toString(),
-        providerId: updatedService!.providerId,
-        category: updatedService!.category,
-        description: updatedService!.description,
-        pricing: updatedService!.pricing,
-        availability: updatedService!.availability,
-        location: updatedService!.location,
-        averageRating: updatedService!.averageRating
+        serviceId: updatedService._id.toString(),
+        providerId: updatedService.providerId,
+        category: updatedService.category,
+        description: updatedService.description,
+        pricing: updatedService.pricing,
+        availability: updatedService.availability,
+        location: updatedService.location,
+        averageRating: updatedService.averageRating
       };
     },
 
-    deleteService: async (_: any, { id }: any, context: any) => {
+    deleteService: async (_, { id }, context) => {
       if (!context.user) {
         throw new GraphQLError('Not authenticated', {
           extensions: { code: 'UNAUTHENTICATED' }
@@ -174,7 +175,7 @@ export const serviceResolvers = {
   },
 
   Service: {
-    provider: async (parent: any) => {
+    provider: async (parent) => {
       const user = await User.findById(parent.providerId);
       
       if (!user) {
@@ -195,3 +196,5 @@ export const serviceResolvers = {
     }
   }
 };
+
+module.exports = { serviceResolvers };

@@ -1,10 +1,11 @@
-import { authResolvers } from './authResolvers';
-import { serviceResolvers } from './serviceResolvers';
-import { bookingResolvers } from './bookingResolvers';
-import { reviewResolvers } from './reviewResolvers';
-import { categoryResolvers } from './categoryResolvers';
+// backend/src/resolvers/index.js
+const { authResolvers } = require('./authResolvers');
+const { serviceResolvers } = require('./serviceResolvers');
+const { bookingResolvers } = require('./bookingResolvers');
+const { reviewResolvers } = require('./reviewResolvers');
+const { categoryResolvers } = require('./categoryResolvers');
 
-export const resolvers = {
+const resolvers = {
   Query: {
     ...authResolvers.Query,
     ...serviceResolvers.Query,
@@ -23,3 +24,5 @@ export const resolvers = {
   Booking: bookingResolvers.Booking,
   Review: reviewResolvers.Review
 };
+
+module.exports = { resolvers };

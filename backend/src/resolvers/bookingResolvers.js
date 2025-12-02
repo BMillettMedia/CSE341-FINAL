@@ -1,11 +1,12 @@
-import { Booking } from '../models/Booking';
-import { Service } from '../models/Service';
-import { User } from '../models/User';
-import { GraphQLError } from 'graphql';
+// backend/src/resolvers/bookingResolvers.js
+const { Booking } = require('../models/Booking');
+const { Service } = require('../models/Service');
+const { User } = require('../models/User');
+const { GraphQLError } = require('graphql');
 
-export const bookingResolvers = {
+const bookingResolvers = {
     Query: {
-        bookings: async (_: any, { userId }: any, context: any) => {
+        bookings: async (_, { userId }, context) => {
             if (!context.user) {
                 throw new GraphQLError('Not authenticated', {
                     extensions: { code: 'UNAUTHENTICATED' }
@@ -27,7 +28,7 @@ export const bookingResolvers = {
             }));
         },
 
-        booking: async (_: any, { id }: any, context: any) => {
+        booking: async (_, { id }, context) => {
             if (!context.user) {
                 throw new GraphQLError('Not authenticated', {
                     extensions: { code: 'UNAUTHENTICATED' }
@@ -55,7 +56,7 @@ export const bookingResolvers = {
             };
         },
 
-        bookingsByProvider: async (_: any, { providerId }: any) => {
+        bookingsByProvider: async (_, { providerId }) => {
             const services = await Service.find({ providerId });
             const serviceIds = services.map(s => s._id.toString());
             const bookings = await Booking.find({ serviceId: { $in: serviceIds } });
@@ -75,7 +76,7 @@ export const bookingResolvers = {
     },
 
     Mutation: {
-        createBooking: async (_: any, { input }: any, context: any) => {
+        createBooking: async (_, { input }, context) => {
             if (!context.user) {
                 throw new GraphQLError('Not authenticated', {
                     extensions: { code: 'UNAUTHENTICATED' }
@@ -117,7 +118,7 @@ export const bookingResolvers = {
             };
         },
 
-        updateBookingStatus: async (_: any, { id, status }: any, context: any) => {
+        updateBookingStatus: async (_, { id, status }, context) => {
             if (!context.user) {
                 throw new GraphQLError('Not authenticated', {
                     extensions: { code: 'UNAUTHENTICATED' }
@@ -146,19 +147,19 @@ export const bookingResolvers = {
             );
 
             return {
-                bookingId: updatedBooking!._id.toString(),
-                customerId: updatedBooking!.customerId,
-                serviceId: updatedBooking!.serviceId,
-                date: updatedBooking!.date.toISOString(),
-                status: updatedBooking!.status,
-                totalCost: updatedBooking!.totalCost,
-                paymentMethod: updatedBooking!.paymentMethod,
+                bookingId: updatedBooking._id.toString(),
+                customerId: updatedBooking.customerId,
+                serviceId: updatedBooking.serviceId,
+                date: updatedBooking.date.toISOString(),
+                status: updatedBooking.status,
+                totalCost: updatedBooking.totalCost,
+                paymentMethod: updatedBooking.paymentMethod,
                 paymentStatus: booking.paymentStatus || 'pending',
                 paymentDate: booking.paymentDate?.toISOString() || null
             };
         },
 
-        deleteBooking: async (_: any, { id }: any, context: any) => {
+        deleteBooking: async (_, { id }, context) => {
             if (!context.user) {
                 throw new GraphQLError('Not authenticated', {
                     extensions: { code: 'UNAUTHENTICATED' }
@@ -183,7 +184,7 @@ export const bookingResolvers = {
             return true;
         },
 
-        markPaymentPaid: async (_: any, { bookingId }: any, context: any) => {
+        markPaymentPaid: async (_, { bookingId }, context) => {
             if (!context.user) {
                 throw new GraphQLError('Not authenticated', {
                     extensions: { code: 'UNAUTHENTICATED' }
@@ -218,7 +219,7 @@ export const bookingResolvers = {
     },
 
     Booking: {
-        customer: async (parent: any) => {
+        customer: async (parent) => {
             const user = await User.findById(parent.customerId);
 
             if (!user) return null;
@@ -236,7 +237,7 @@ export const bookingResolvers = {
             };
         },
 
-        service: async (parent: any) => {
+        service: async (parent) => {
             const service = await Service.findById(parent.serviceId);
 
             if (!service) return null;
@@ -254,3 +255,5 @@ export const bookingResolvers = {
         }
     }
 };
+
+module.exports = { bookingResolvers };

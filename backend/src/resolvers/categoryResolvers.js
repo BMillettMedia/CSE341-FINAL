@@ -1,7 +1,8 @@
-import { Category } from '../models/Category';
-import { GraphQLError } from 'graphql';
+// backend/src/resolvers/categoryResolvers.js
+const { Category } = require('../models/Category');
+const { GraphQLError } = require('graphql');
 
-export const categoryResolvers = {
+const categoryResolvers = {
   Query: {
     categories: async () => {
       const categories = await Category.find();
@@ -14,7 +15,7 @@ export const categoryResolvers = {
       }));
     },
 
-    category: async (_: any, { id }: any) => {
+    category: async (_, { id }) => {
       const category = await Category.findById(id);
       
       if (!category) {
@@ -33,7 +34,7 @@ export const categoryResolvers = {
   },
 
   Mutation: {
-    createCategory: async (_: any, { input }: any, context: any) => {
+    createCategory: async (_, { input }, context) => {
       if (!context.user) {
         throw new GraphQLError('Not authenticated', {
           extensions: { code: 'UNAUTHENTICATED' }
@@ -50,7 +51,7 @@ export const categoryResolvers = {
       };
     },
 
-    updateCategory: async (_: any, { id, input }: any, context: any) => {
+    updateCategory: async (_, { id, input }, context) => {
       if (!context.user) {
         throw new GraphQLError('Not authenticated', {
           extensions: { code: 'UNAUTHENTICATED' }
@@ -77,7 +78,7 @@ export const categoryResolvers = {
       };
     },
 
-    deleteCategory: async (_: any, { id }: any, context: any) => {
+    deleteCategory: async (_, { id }, context) => {
       if (!context.user) {
         throw new GraphQLError('Not authenticated', {
           extensions: { code: 'UNAUTHENTICATED' }
@@ -96,3 +97,5 @@ export const categoryResolvers = {
     }
   }
 };
+
+module.exports = { categoryResolvers };

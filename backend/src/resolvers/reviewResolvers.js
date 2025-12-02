@@ -1,12 +1,13 @@
-import { Review } from '../models/Review';
-import { Booking } from '../models/Booking';
-import { Service } from '../models/Service';
-import { User } from '../models/User';
-import { GraphQLError } from 'graphql';
+// backend/src/resolvers/reviewResolvers.js
+const { Review } = require('../models/Review');
+const { Booking } = require('../models/Booking');
+const { Service } = require('../models/Service');
+const { User } = require('../models/User');
+const { GraphQLError } = require('graphql');
 
-export const reviewResolvers = {
+const reviewResolvers = {
   Query: {
-    reviews: async (_: any, { serviceId }: any) => {
+    reviews: async (_, { serviceId }) => {
       const reviews = await Review.find().populate('bookingId');
       
       // Filter reviews by service
@@ -30,7 +31,7 @@ export const reviewResolvers = {
   },
 
   Mutation: {
-    addReview: async (_: any, { input }: any, context: any) => {
+    addReview: async (_, { input }, context) => {
       if (!context.user) {
         throw new GraphQLError('Not authenticated', {
           extensions: { code: 'UNAUTHENTICATED' }
@@ -103,7 +104,7 @@ export const reviewResolvers = {
   },
 
   Review: {
-    customer: async (parent: any) => {
+    customer: async (parent) => {
       const user = await User.findById(parent.customerId);
       
       if (!user) return null;
@@ -122,3 +123,5 @@ export const reviewResolvers = {
     }
   }
 };
+
+module.exports = { reviewResolvers };

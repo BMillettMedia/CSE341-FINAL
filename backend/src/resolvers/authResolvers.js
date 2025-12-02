@@ -1,11 +1,11 @@
-// backend/src/resolver/authResolvers.ts
-import { User } from '../models/User';
-import { generateToken, hashPassword, comparePassword, validateEmail, validatePhone } from '../utils/auth';
-import { GraphQLError } from 'graphql';
+// backend/src/resolvers/authResolvers.js
+const { User } = require('../models/User');
+const { generateToken, hashPassword, comparePassword, validateEmail, validatePhone } = require('../utils/auth');
+const { GraphQLError } = require('graphql');
 
-export const authResolvers = {
+const authResolvers = {
   Query: {
-    me: async (_: any, __: any, context: any) => {
+    me: async (_, __, context) => {
       if (!context.user) {
         throw new GraphQLError('Not authenticated', {
           extensions: { code: 'UNAUTHENTICATED' }
@@ -34,7 +34,7 @@ export const authResolvers = {
   },
 
   Mutation: {
-    register: async (_: any, { input }: any) => {
+    register: async (_, { input }) => {
       // Validation
       if (!validateEmail(input.email)) {
         throw new GraphQLError('Invalid email format', {
@@ -104,7 +104,7 @@ export const authResolvers = {
       };
     },
 
-    login: async (_: any, { input }: any) => {
+    login: async (_, { input }) => {
       // Find user
       const user = await User.findOne({ email: input.email }).select('+password');
       if (!user) {
@@ -151,3 +151,5 @@ export const authResolvers = {
     }
   }
 };
+
+module.exports = { authResolvers };
