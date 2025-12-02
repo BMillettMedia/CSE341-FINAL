@@ -1,18 +1,8 @@
-// backend/src/models/Booking.ts
-import mongoose, { Schema, Document } from 'mongoose';
+// backend/src/models/Booking.js
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-export interface BookingDocument extends Document {
-    customerId: string;
-    serviceId: string;
-    date: Date;
-    status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
-    totalCost: number;
-    paymentMethod: 'cash' | 'orange' | 'mtn' | 'moov';
-    paymentStatus: 'pending' | 'paid' | 'refunded';
-    paymentDate?: Date;
-}
-
-const BookingSchema = new Schema<BookingDocument>({
+const BookingSchema = new Schema({
     customerId: { type: String, required: true, ref: 'User' },
     serviceId: { type: String, required: true, ref: 'Service' },
     date: { type: Date, required: true },
@@ -23,4 +13,6 @@ const BookingSchema = new Schema<BookingDocument>({
     paymentDate: { type: Date }
 }, { timestamps: true });
 
-export const Booking = mongoose.model<BookingDocument>('Booking', BookingSchema);
+const Booking = mongoose.model('Booking', BookingSchema);
+
+module.exports = { Booking };
