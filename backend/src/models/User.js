@@ -1,25 +1,6 @@
-// backend/src/models/User.ts
-import mongoose, { Schema, Document } from 'mongoose';
-
-export interface UserDocument extends Document {
-    email: string;
-    password?: string;
-    name: string;
-    phone: string;
-    userType: 'customer' | 'provider';
-    location: {
-        city: string;
-        district: string;
-        coordinates?: {
-            latitude: number;
-            longitude: number;
-        };
-    };
-    profileImage?: string;
-    isVerified?: boolean;
-    googleId?: string;
-    createdAt: Date;
-}
+// backend/src/models/User.js
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const LocationSchema = new Schema({
     city: { type: String, required: true },
@@ -30,7 +11,7 @@ const LocationSchema = new Schema({
     }
 }, { _id: false });
 
-const UserSchema = new Schema<UserDocument>({
+const UserSchema = new Schema({
     email: {
         type: String,
         required: true,
@@ -70,10 +51,16 @@ const UserSchema = new Schema<UserDocument>({
         unique: true,
         sparse: true
     },
+    google: {
+        id: String,
+        provider: String
+    },
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
 
-export const User = mongoose.model<UserDocument>('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+
+module.exports = { User };
