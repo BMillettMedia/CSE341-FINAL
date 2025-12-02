@@ -1,26 +1,6 @@
-// backend/src/models/Service.ts
-import mongoose, { Schema, Document } from 'mongoose';
-
-export interface ServiceDocument extends Document {
-    providerId: string;
-    category: string;
-    description: string;
-    pricing: number;
-    availability: Array<{
-        dayOfWeek: string;
-        startTime: string;
-        endTime: string;
-    }>;
-    location: {
-        city: string;
-        district: string;
-        coordinates?: {
-            latitude: number;
-            longitude: number;
-        };
-    };
-    averageRating: number;
-}
+// backend/src/models/Service.js
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const TimeSlotSchema = new Schema({
     dayOfWeek: { type: String, required: true },
@@ -37,7 +17,7 @@ const LocationSchema = new Schema({
     }
 }, { _id: false });
 
-const ServiceSchema = new Schema<ServiceDocument>({
+const ServiceSchema = new Schema({
     providerId: {
         type: String,
         required: true,
@@ -69,4 +49,6 @@ const ServiceSchema = new Schema<ServiceDocument>({
     }
 });
 
-export const Service = mongoose.model<ServiceDocument>('Service', ServiceSchema);
+const Service = mongoose.model('Service', ServiceSchema);
+
+module.exports = { Service };
