@@ -1,10 +1,7 @@
-// backend/src/config/database.ts
+// backend/src/config/database.js
+const mongoose = require('mongoose');
 
-//waiting for db info & link for .env file
-
-import mongoose from 'mongoose';
-
-export const connectDB = async (): Promise<void> => {
+const connectDB = async () => {
     try {
         const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/service-marketplace';
 
@@ -25,3 +22,4 @@ mongoose.connection.on('error', (err) => {
     console.error('MongoDB error:', err);
 });
 
+module.exports = { connectDB };
