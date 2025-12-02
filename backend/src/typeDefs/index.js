@@ -1,5 +1,6 @@
-export const typeDefs = `#graphql
-  type User {
+// backend/src/typeDefs/index.js
+const typeDefs = `#graphql
+type User {
     userId: ID!
     email: String!
     name: String!
@@ -9,14 +10,14 @@ export const typeDefs = `#graphql
     createdAt: String!
     profileImage: String
     isVerified: Boolean
-  }
+}
 
-  type AuthPayload {
+type AuthPayload {
     token: String!
     user: User!
-  }
+}
 
-  type Service {
+type Service {
     serviceId: ID!
     providerId: ID!
     provider: User!
@@ -26,29 +27,29 @@ export const typeDefs = `#graphql
     location: Location!
     averageRating: Float!
     availability: [TimeSlot!]!
-  }
+}
 
-  type TimeSlot {
+type TimeSlot {
     dayOfWeek: String!
     startTime: String!
     endTime: String!
-  }
-
-  type Booking {
-  bookingId: ID!
-  customerId: ID!
-  customer: User!
-  serviceId: ID!
-  service: Service!
-  date: String!
-  status: String!
-  totalCost: Float!
-  paymentMethod: String!
-  paymentStatus: String
-  paymentDate: String
 }
 
-  type Review {
+type Booking {
+    bookingId: ID!
+    customerId: ID!
+    customer: User!
+    serviceId: ID!
+    service: Service!
+    date: String!
+    status: String!
+    totalCost: Float!
+    paymentMethod: String!
+    paymentStatus: String
+    paymentDate: String
+}
+
+type Review {
     reviewId: ID!
     bookingId: ID!
     customerId: ID!
@@ -56,75 +57,87 @@ export const typeDefs = `#graphql
     rating: Int!
     comment: String!
     createdAt: String!
-  }
+}
 
-  type Category {
+type Category {
     categoryId: ID!
     name: String!
     description: String!
     icon: String!
-  }
+}
 
-  type Location {
+type Location {
     city: String!
     district: String!
-  }
+    coordinates: Coordinates
+}
 
-  input RegisterInput {
+type Coordinates {
+    latitude: Float
+    longitude: Float
+}
+
+input RegisterInput {
     email: String!
     password: String!
     name: String!
     phone: String!
     userType: String!
     location: LocationInput!
-  }
+}
 
-  input LoginInput {
+input LoginInput {
     email: String!
     password: String!
-  }
+}
 
-  input LocationInput {
+input LocationInput {
     city: String!
     district: String!
-  }
+    coordinates: CoordinatesInput
+}
 
-  input ServiceInput {
+input CoordinatesInput {
+    latitude: Float
+    longitude: Float
+}
+
+input ServiceInput {
     providerId: ID!
     category: String!
     description: String!
     pricing: Float!
     location: LocationInput!
     availability: [TimeSlotInput!]!
-  }
+}
 
-  input TimeSlotInput {
+input TimeSlotInput {
     dayOfWeek: String!
     startTime: String!
     endTime: String!
-  }
+}
 
-  input BookingInput {
+input BookingInput {
     customerId: ID!
     serviceId: ID!
     date: String!
     paymentMethod: String!
-  }
+}
 
-  input ReviewInput {
+input ReviewInput {
     bookingId: ID!
     customerId: ID!
     rating: Int!
     comment: String!
-  }
+}
 
-  input CategoryInput {
+input CategoryInput {
     name: String!
     description: String!
     icon: String!
-  }
+}
 
-  type Query {
+type Query {
     me: User
     services(location: String, category: String): [Service!]!
     service(id: ID!): Service
@@ -135,9 +148,9 @@ export const typeDefs = `#graphql
     reviews(serviceId: ID!): [Review!]!
     categories: [Category!]!
     category(id: ID!): Category
-  }
+}
 
-  type Mutation {
+type Mutation {
     register(input: RegisterInput!): AuthPayload!
     login(input: LoginInput!): AuthPayload!
     createService(input: ServiceInput!): Service!
@@ -151,5 +164,7 @@ export const typeDefs = `#graphql
     updateCategory(id: ID!, input: CategoryInput!): Category!
     deleteCategory(id: ID!): Boolean!
     markPaymentPaid(bookingId: ID!): Booking!
-  }
+}
 `;
+
+module.exports = { typeDefs };
