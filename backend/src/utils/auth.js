@@ -1,10 +1,10 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-import { IUser } from '../types';
+// backend/src/utils/auth.js
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'd7ee794797e12cca5e5f23b6dd91a4066f436a62813b5aac4f280d86cfdd8479';
 
-export const generateToken = (user: IUser): string => {
+const generateToken = (user) => {
   return jwt.sign(
     { 
       userId: user.userId, 
@@ -16,7 +16,7 @@ export const generateToken = (user: IUser): string => {
   );
 };
 
-export const verifyToken = (token: string): any => {
+const verifyToken = (token) => {
   try {
     return jwt.verify(token, JWT_SECRET);
   } catch (error) {
@@ -24,23 +24,29 @@ export const verifyToken = (token: string): any => {
   }
 };
 
-export const hashPassword = async (password: string): Promise<string> => {
+const hashPassword = async (password) => {
   return bcrypt.hash(password, 10);
 };
 
-export const comparePassword = async (
-  password: string,
-  hashedPassword: string
-): Promise<boolean> => {
+const comparePassword = async (password, hashedPassword) => {
   return bcrypt.compare(password, hashedPassword);
 };
 
-export const validateEmail = (email: string): boolean => {
+const validateEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
-export const validatePhone = (phone: string): boolean => {
+const validatePhone = (phone) => {
   const phoneRegex = /^\+?[\d\s-]{8,}$/;
   return phoneRegex.test(phone);
+};
+
+module.exports = {
+  generateToken,
+  verifyToken,
+  hashPassword,
+  comparePassword,
+  validateEmail,
+  validatePhone
 };
