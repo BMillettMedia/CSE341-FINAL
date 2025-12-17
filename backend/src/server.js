@@ -21,7 +21,9 @@ const PORT = process.env.PORT || 4000;
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: process.env.GOOGLE_CALLBACK_URL || "http://localhost:4000/auth/google/callback"
+        callbackURL: process.env.NODE_ENV === 'production'
+            ? process.env.GOOGLE_CALLBACK_URL_PROD
+            : process.env.GOOGLE_CALLBACK_URL_DEV || "http://localhost:4000/auth/google/callback"
     },
     async (accessToken, refreshToken, profile, done) => {
         try {
@@ -101,10 +103,13 @@ async function startServer() {
 
             const token = generateToken(userObj);
 
-            console.log('callback redirect link', `${process.env.FRONTEND_URL}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(userObj))}`)
+            // Use environment-based frontend URL
+            const frontendUrl = process.env.NODE_ENV === 'production'
+                ? process.env.FRONTEND_URL_PROD
+                : process.env.FRONTEND_URL_DEV;
 
             // Redirect to frontend with token
-            res.redirect(`${process.env.FRONTEND_URL}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(userObj))}`);
+            res.redirect(`${frontendUrl}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(userObj))}`);
         }
     );
 
