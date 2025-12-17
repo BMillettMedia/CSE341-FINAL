@@ -2,7 +2,9 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client/core
 import { setContext } from '@apollo/client/link/context'
 
 const httpLink = createHttpLink({
-    uri: process.env.VUE_APP_GRAPHQL_URL || 'http://localhost:4000/graphql',
+    uri: process.env.NODE_ENV === 'production'
+        ? process.env.VUE_APP_GRAPHQL_PROD_URL
+        : process.env.VUE_APP_GRAPHQL_DEV_URL
 })
 
 const authLink = setContext((_, { headers }) => {
