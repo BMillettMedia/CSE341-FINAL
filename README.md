@@ -1,1 +1,0 @@
-This is a group project for WDD330- with Bryan Millett, Rellinxe Boni, Sariah Tanner and Truman Benjamin. 
