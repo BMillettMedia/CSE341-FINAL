@@ -1,0 +1,22 @@
+{
+  "name": "service-marketplace-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.8.8",
+    "@vue/apollo-composable": "^4.0.0",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
+    "vue": "^3.3.11",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^5.0.8",
+    "vue-template-compiler": "^2.7.16"
+  }
+}
