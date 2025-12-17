@@ -56,8 +56,8 @@ export default {
     const error = ref('')
     const loginWithGoogle = () => {
       window.location.href = process.env.NODE_ENV === 'production'
-          ? process.env.GOOGLE_CALLBACK_URL_PROD
-          : process.env.GOOGLE_CALLBACK_URL_DEV
+          ? "https://cse341-final-backend.onrender.com/auth/google"
+          : "http://localhost:4000/auth/google"
     }
 
     const handleLogin = async () => {
