@@ -24,6 +24,13 @@
           {{ loading ? 'Loading...' : 'Login' }}
         </button>
       </form>
+      <div class="divider">OR</div>
+
+      <button @click="loginWithGoogle" type="button" class="google-btn">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+        Continue with Google
+      </button>
+
       <p class="link-text">
         Don't have an account? <router-link to="/register">Register</router-link>
       </p>
@@ -35,7 +42,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import apolloClient from '../apollo'
-import { LOGIN } from '../graphql/queries'
+import { LOGIN } from '@/graphql/queries'
 
 export default {
   name: 'Login',
@@ -47,6 +54,9 @@ export default {
     })
     const loading = ref(false)
     const error = ref('')
+    const loginWithGoogle = () => {
+      window.location.href = 'http://localhost:4000/auth/google'
+    }
 
     const handleLogin = async () => {
       loading.value = true
@@ -79,7 +89,8 @@ export default {
       form,
       loading,
       error,
-      handleLogin
+      handleLogin,
+      loginWithGoogle
     }
   }
 }
@@ -166,5 +177,55 @@ button:disabled {
 
 .link-text a:hover {
   text-decoration: underline;
+}
+
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  color: #999;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background: #ddd;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: white;
+  color: #444;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.google-btn:hover {
+  background-color: #f8f8f8;
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
 }
 </style>
