@@ -101,6 +101,8 @@ async function startServer() {
 
             const token = generateToken(userObj);
 
+            console.log('callback redirect link', `${process.env.FRONTEND_URL}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(userObj))}`)
+
             // Redirect to frontend with token
             res.redirect(`${process.env.FRONTEND_URL}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(userObj))}`);
         }
