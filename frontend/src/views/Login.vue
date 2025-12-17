@@ -39,10 +39,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import {ref} from 'vue'
+import {useRouter} from 'vue-router'
 import apolloClient from '../apollo'
-import { LOGIN } from '@/graphql/queries'
+import {LOGIN} from '@/graphql/queries'
 
 export default {
   name: 'Login',
@@ -55,7 +55,9 @@ export default {
     const loading = ref(false)
     const error = ref('')
     const loginWithGoogle = () => {
-      window.location.href = 'http://localhost:4000/auth/google'
+      window.location.href = process.env.NODE_ENV === 'production'
+          ? "https://cse341-final-backend.onrender.com/auth/google"
+          : "http://localhost:4000/auth/google"
     }
 
     const handleLogin = async () => {
