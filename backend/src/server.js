@@ -106,6 +106,8 @@ async function startServer() {
             // Use environment-based frontend URL
             const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:8080';
 
+            console.log(`Redirecting to frontend URL: ${frontendUrl}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(userObj))}`);
+
             // Redirect to frontend with token
             res.redirect(`${frontendUrl}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(userObj))}`);
         }
