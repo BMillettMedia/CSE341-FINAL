@@ -3,8 +3,8 @@ import { setContext } from '@apollo/client/link/context'
 
 const httpLink = createHttpLink({
     uri: process.env.NODE_ENV === 'production'
-        ? process.env.VUE_APP_GRAPHQL_PROD_URL
-        : process.env.VUE_APP_GRAPHQL_DEV_URL
+        ? 'https://cse341-final-backend.onrender.com/graphql'
+        : 'http://localhost:4000/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {
