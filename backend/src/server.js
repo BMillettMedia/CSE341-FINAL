@@ -21,9 +21,7 @@ const PORT = process.env.PORT || 4000;
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: process.env.NODE_ENV === 'production'
-            ? process.env.GOOGLE_CALLBACK_URL_PROD
-            : process.env.GOOGLE_CALLBACK_URL_DEV || "http://localhost:4000/auth/google/callback"
+        callbackURL: process.env.GOOGLE_CALLBACK_URL_PROD || "http://localhost:4000/auth/google/callback"
     },
     async (accessToken, refreshToken, profile, done) => {
         try {
@@ -76,7 +74,11 @@ async function startServer() {
 
     // Middleware
     app.use(cors({
-        origin: process.env.FRONTEND_URL || 'http://localhost:8080',
+        //origin: process.env.FRONTEND_URL || 'http://localhost:8080',
+        origin: [
+            'http://localhost:8080',
+            'https://cse341-final-kupm.onrender.com'
+        ],
         credentials: true
     }));
     app.use(express.json());
