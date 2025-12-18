@@ -104,9 +104,7 @@ async function startServer() {
             const token = generateToken(userObj);
 
             // Use environment-based frontend URL
-            const frontendUrl = process.env.NODE_ENV === 'production'
-                ? process.env.FRONTEND_URL_PROD
-                : process.env.FRONTEND_URL_DEV;
+            const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:8080';
 
             // Redirect to frontend with token
             res.redirect(`${frontendUrl}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(userObj))}`);
