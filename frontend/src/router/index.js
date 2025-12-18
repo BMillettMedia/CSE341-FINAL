@@ -25,7 +25,8 @@ const routes = [
     {
         path: '/auth/callback',
         name: 'OAuthCallback',
-        component: OAuthCallback
+        component: OAuthCallback,
+        meta: { requiresAuth: false }
     },
     {
         path: '/services',
